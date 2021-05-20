@@ -8,6 +8,10 @@ module.exports = {
     mode: 'development',
     devtool: 'source-map',
     stats: 'verbose',
+    output: {
+        libraryTarget: 'var',
+        library: 'Client'
+    },
     module: {
         rules: [
             {
@@ -19,6 +23,17 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use:['style-loader', 'css-loader', 'sass-loader'] // these run right to left, sass-loader first
+            },
+
+            {
+                test: /\.(png|PNG)$/,
+                use:[{
+                    loader:'url-loader',
+                    options: {
+                        limit: 8000,
+                        name: 'images/[hash]-[name].[ext]'
+                    }
+                }] // these run right to left, sass-loader first
             }
         ]
     },

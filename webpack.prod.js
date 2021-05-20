@@ -5,12 +5,31 @@ const HtmlWebPackPlugin = require("html-webpack-plugin")
 module.exports = {
     entry: './src/client/index.js',
     mode: 'production',
+    output: {
+        libraryTarget: 'var',
+        library: 'Client'
+    },
     module: {
         rules: [
             {
                 test: '/\.js$/',
                 exclude: /node_modules/,
                 loader: "babel-loader"
+            },
+            {
+                test: /\.scss$/,
+                use:['style-loader', 'css-loader', 'sass-loader'] // these run right to left, sass-loader first
+            },
+
+            {
+                test: /\.(png|PNG)$/,
+                use:[{
+                    loader:'url-loader',
+                    options: {
+                        limit: 8000,
+                        name: 'images/[hash]-[name].[ext]'
+                    }
+                }] // these run right to left, sass-loader first
             }
         ]
     },
