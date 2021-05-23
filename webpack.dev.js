@@ -22,7 +22,7 @@ module.exports = {
             
             {
                 test: /\.scss$/,
-                use:['style-loader', 'css-loader', 'sass-loader'] // these run right to left, sass-loader first
+                use:['style-loader', 'css-loader', 'sass-loader'] // these run right to left, sass-loader first and add styles as in-line. OK for dev but not prod
             },
 
             {
